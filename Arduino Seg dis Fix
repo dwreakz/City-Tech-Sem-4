@@ -50,10 +50,10 @@ void loop()
 
 void dp_led_control(void)
 {
-   if (timer1 < 50)
-        digitalWrite(LEDpin,0);
-    else if (timer1 < 100)
-        digitalWrite(LEDpin,1);
+   if (timer1 < 5)
+        digitalWrite(segmentDP,0);
+    else if (timer1 < 10)
+        digitalWrite(segmentDP,1);
     else 
         timer1 = 0; 
 }
@@ -68,7 +68,7 @@ void seven_segment_control(void)
     if(timer2 > 10)
     {
         Serial.println(seven_segment_state); 
-        if(seven_segment_state < 9)
+        if(seven_segment_state <=9)
     {
             // Turn off all segments
             digitalWrite(segmentA, LOW);
@@ -149,7 +149,7 @@ void seven_segment_control(void)
                     digitalWrite(segmentB, HIGH);
                     digitalWrite(segmentC, HIGH);
                     digitalWrite(segmentD, HIGH);
-                    digitalWrite(segmentF, HIGH);
+       		        digitalWrite(segmentF, HIGH);
                     digitalWrite(segmentG, HIGH);
                     break;
   }
