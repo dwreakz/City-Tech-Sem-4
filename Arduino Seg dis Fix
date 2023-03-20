@@ -1,0 +1,183 @@
+// EMT 2410 Lab 3 
+// Counting 7 segment display (Arduino) 
+
+#define LEDpin 13
+#define USER_BUTTON 10
+#define segmentA 2
+#define segmentB 3
+#define segmentC 4
+#define segmentD 5
+#define segmentE 6
+#define segmentF 7
+#define segmentG 8
+#define segmentDP 9
+
+unsigned int timer1; // dp LED timer used to blink dp in 7-segment
+unsigned int timer2; // timer used for up counter in 7-segment display
+
+//variable to control state of 7-segment
+unsigned int seven_segment_state; // 0,1,2,3,4,5,6,7,8,9,0,1,2...
+
+
+void timers();
+void dp_led_control(void);
+void seven_segment_control(void);
+
+void timers(void);
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(LEDpin, OUTPUT);
+  pinMode(USER_BUTTON, INPUT_PULLUP);
+  pinMode(segmentA, OUTPUT);
+  pinMode(segmentB, OUTPUT);
+  pinMode(segmentC, OUTPUT);
+  pinMode(segmentD, OUTPUT);
+  pinMode(segmentE, OUTPUT);
+  pinMode(segmentF, OUTPUT);
+  pinMode(segmentG, OUTPUT);
+  pinMode(segmentDP, OUTPUT);
+}
+
+void loop()
+{
+    timers();
+    dp_led_control();
+    seven_segment_control();
+}
+
+
+void dp_led_control(void)
+{
+   if (timer1 < 50)
+        digitalWrite(LEDpin,0);
+    else if (timer1 < 100)
+        digitalWrite(LEDpin,1);
+    else 
+        timer1 = 0; 
+}
+
+void seven_segment_control(void)
+{
+    if(digitalRead(USER_BUTTON) == 1)
+    {//button is not pressed
+        timer2 = 0;
+    }
+
+    if(timer2 > 10)
+    {
+        Serial.println(seven_segment_state); 
+        if(seven_segment_state < 9)
+    {
+            // Turn off all segments
+            digitalWrite(segmentA, HIGH);
+            digitalWrite(segmentB, HIGH);
+            digitalWrite(segmentC, HIGH);
+            digitalWrite(segmentD, HIGH);
+            digitalWrite(segmentE, HIGH);
+            digitalWrite(segmentF, HIGH);
+            digitalWrite(segmentG, HIGH);
+            digitalWrite(segmentDP, HIGH);
+
+            // Determine which segments should be turned on based on the current digit
+            switch(seven_segment_state)
+            {
+                case 0:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentE, LOW);
+                    digitalWrite(segmentF, LOW);
+                    break;
+                case 1:
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    break;
+                case 2:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentE, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+                case 3:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+                case 4:
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentF, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+                case 5:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentF, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+                case 6:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentE, LOW);
+                    digitalWrite(segmentF, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+                case 7:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    break;
+                case 8:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentE, LOW);
+                    digitalWrite(segmentF, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+                case 9:
+                    digitalWrite(segmentA, LOW);
+                    digitalWrite(segmentB, LOW);
+                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentD, LOW);
+                    digitalWrite(segmentF, LOW);
+                    digitalWrite(segmentG, LOW);
+                    break;
+  }
+            seven_segment_state++;
+        }
+        else
+            seven_segment_state = 0;
+        timer2 = 0;
+    }
+
+    //control the segments based on seven_segment_state 
+
+}
+
+
+void timers(void)
+{
+  static unsigned long millis_old = 0;// track the # ms the mcu has been running
+  unsigned interval = 100;  // meaning every 100ms
+
+  if(millis() >= millis_old + interval)
+  {//it falls into this section once every 100s
+    millis_old = millis_old + interval;
+    timer1++;
+    timer2++;
+  }
+
+  if(millis_old > millis())//if you run for a very long time, correct overflow
+    millis_old = millis();  
+
+}
