@@ -1,6 +1,9 @@
 // EMT 2410 Lab 3 
 // Counting 7 segment display (Arduino) 
+// Dereck Chetram & Al Moktader Sadman Worked on this lab together
 
+
+// Defined segments to pins and changed Button Pin
 #define LEDpin 13
 #define USER_BUTTON 10
 #define segmentA 2
@@ -25,6 +28,8 @@ void seven_segment_control(void);
 
 void timers(void);
 
+//Added Pin Output mode to the segments 
+
 void setup()
 {
   Serial.begin(9600);
@@ -47,12 +52,13 @@ void loop()
     seven_segment_control();
 }
 
-
+//Changed timer values to blink 5 times in 1 second based on timer 1
+//not able to get it to work on TINKERCAD but it works on hardware
 void dp_led_control(void)
 {
-   if (timer1 < 5)
+   if (timer1 < 1)
         digitalWrite(segmentDP,0);
-    else if (timer1 < 10)
+    else if (timer1 < 5)
         digitalWrite(segmentDP,1);
     else 
         timer1 = 0; 
@@ -64,7 +70,6 @@ void seven_segment_control(void)
     {//button is not pressed
         timer2 = 0;
     }
-
     if(timer2 > 10)
     {
         Serial.println(seven_segment_state); 
@@ -80,7 +85,7 @@ void seven_segment_control(void)
             digitalWrite(segmentG, LOW);
             digitalWrite(segmentDP, LOW);
 
-            // Determine which segments should be turned on based on the current digit
+            //Added a library of values to display 1 , 2 , 3 .... 9
             switch(seven_segment_state)
             {
                 case 0:
