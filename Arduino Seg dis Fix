@@ -71,86 +71,86 @@ void seven_segment_control(void)
         if(seven_segment_state < 9)
     {
             // Turn off all segments
-            digitalWrite(segmentA, HIGH);
-            digitalWrite(segmentB, HIGH);
-            digitalWrite(segmentC, HIGH);
-            digitalWrite(segmentD, HIGH);
-            digitalWrite(segmentE, HIGH);
-            digitalWrite(segmentF, HIGH);
-            digitalWrite(segmentG, HIGH);
-            digitalWrite(segmentDP, HIGH);
+            digitalWrite(segmentA, LOW);
+            digitalWrite(segmentB, LOW);
+            digitalWrite(segmentC, LOW);
+            digitalWrite(segmentD, LOW);
+            digitalWrite(segmentE, LOW);
+            digitalWrite(segmentF, LOW);
+            digitalWrite(segmentG, LOW);
+            digitalWrite(segmentDP, LOW);
 
             // Determine which segments should be turned on based on the current digit
             switch(seven_segment_state)
             {
                 case 0:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentE, LOW);
-                    digitalWrite(segmentF, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentE, HIGH);
+                    digitalWrite(segmentF, HIGH);
                     break;
                 case 1:
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
                     break;
                 case 2:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentE, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentE, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
                 case 3:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
                 case 4:
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentF, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentF, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
                 case 5:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentF, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentF, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
                 case 6:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentE, LOW);
-                    digitalWrite(segmentF, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentE, HIGH);
+                    digitalWrite(segmentF, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
                 case 7:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
                     break;
                 case 8:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentE, LOW);
-                    digitalWrite(segmentF, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentE, HIGH);
+                    digitalWrite(segmentF, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
                 case 9:
-                    digitalWrite(segmentA, LOW);
-                    digitalWrite(segmentB, LOW);
-                    digitalWrite(segmentC, LOW);
-                    digitalWrite(segmentD, LOW);
-                    digitalWrite(segmentF, LOW);
-                    digitalWrite(segmentG, LOW);
+                    digitalWrite(segmentA, HIGH);
+                    digitalWrite(segmentB, HIGH);
+                    digitalWrite(segmentC, HIGH);
+                    digitalWrite(segmentD, HIGH);
+                    digitalWrite(segmentF, HIGH);
+                    digitalWrite(segmentG, HIGH);
                     break;
   }
             seven_segment_state++;
